@@ -13,6 +13,7 @@ class App extends React.Component {
       loading: true,
       isSignedIn: false,
       auth2: null,
+      profile: null,
     }
   }
 
@@ -86,6 +87,7 @@ class App extends React.Component {
         isSignedIn={this.state.isSignedIn}
         handleSignOutClick={this.handleSignOutClick}
         handleAuthClick={this.handleAuthClick}
+        {...this.state.profile}
       />
     );
   }
