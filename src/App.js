@@ -1,6 +1,9 @@
 /* global gapi */
 import React from 'react';
 import credentials from './configs/credentials';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AppLoader from "./AppLoader";
+import Header from "./Header";
 
 class App extends React.Component {
   constructor(props) {
@@ -74,20 +77,17 @@ class App extends React.Component {
   }
 
   render() {
-    const loader = <div>Загрузка</div>;
-    const signIn = <button onClick={this.handleAuthClick}>Войти</button>;
-    const signOut = <div>
-      <button onClick={this.handleSignOutClick}>Выйти</button>
-    </div>;
-
     if (this.state.loading) {
-      return loader;
-    } else if (this.state.isSignedIn) {
-      return signOut;
+      return <AppLoader/>;
     }
 
-    return signIn;
-
+    return (
+      <Header
+        isSignedIn={this.state.isSignedIn}
+        handleSignOutClick={this.handleSignOutClick}
+        handleAuthClick={this.handleAuthClick}
+      />
+    );
   }
 }
 
