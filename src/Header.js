@@ -1,8 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Navbar, Button, DropdownButton, Dropdown } from 'react-bootstrap'
 
-export default class Header extends React.Component {
+class Header extends React.Component {
+  static propTypes = {
+    isSignedIn: PropTypes.bool.isRequired,
+    fullName: PropTypes.string,
+    handleAuthClick: PropTypes.func.isRequired,
+    handleSignOutClick: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    isSignedIn: false,
+    fullName: 'Неизвестно',
+    handleAuthClick: () => {},
+    handleSignOutClick: () => {},
+  }
+
   render() {
+    const {
+      isSignedIn,
+      fullName,
+      handleSignOutClick,
+      handleAuthClick
+    } = this.props;
+
     const signOut = (
       <DropdownButton
         alignRight
@@ -11,11 +33,11 @@ export default class Header extends React.Component {
         variant="outline-light"
       >
         <Dropdown.Item as="button" disabled>
-          { this.props.fullName }
+          {fullName}
         </Dropdown.Item>
         <Dropdown.Divider/>
         <Dropdown.Item
-          onClick={this.props.handleSignOutClick}
+          onClick={handleSignOutClick}
           as="button"
         >
           Выход
@@ -27,7 +49,7 @@ export default class Header extends React.Component {
       <Button
         className="ml-auto"
         variant="outline-light"
-        onClick={this.props.handleAuthClick}
+        onClick={handleAuthClick}
       >
         Вход
       </Button>
@@ -41,8 +63,10 @@ export default class Header extends React.Component {
         <Navbar.Brand>
           Not Gmail
         </Navbar.Brand>
-        {this.props.isSignedIn ? signOut : signIn}
+        {isSignedIn ? signOut : signIn}
       </Navbar>
     )
   }
 }
+
+export default Header;

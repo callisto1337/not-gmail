@@ -13,7 +13,7 @@ class App extends React.Component {
       loading: true,
       isSignedIn: false,
       auth2: null,
-      profile: null,
+      profile: {},
     }
   }
 
@@ -38,7 +38,7 @@ class App extends React.Component {
         }
       })
     } else {
-      this.setState({profile: null})
+      this.setState({profile: {}})
     }
 
     this.setState({isSignedIn});
@@ -87,7 +87,7 @@ class App extends React.Component {
         isSignedIn={this.state.isSignedIn}
         handleSignOutClick={this.handleSignOutClick}
         handleAuthClick={this.handleAuthClick}
-        {...this.state.profile}
+        fullName={this.state.profile.fullName}
       />
     );
   }
