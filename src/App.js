@@ -1,7 +1,6 @@
 /* global gapi */
 import React from 'react';
-import credentials from './configs/credentials';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { credentials } from './configs';
 import AppLoader from "./AppLoader";
 import Header from "./Header";
 
@@ -13,68 +12,69 @@ class App extends React.Component {
       loading: true,
       isSignedIn: false,
       auth2: null,
-      profile: {},
-    }
+      profile: null,
+    };
+
+    gapi.load('client:auth2', this.initApp);
   }
 
-  componentDidMount() {
-    this.handleClientLoad();
+  initApp = () => {
+    const auth2 = gapi.auth2.init({
+      clientId: credentials.CLIENT_ID,
+    });
+
+    this.setState({auth2});
+
+    auth2.then(() => {
+      gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSignInStatus);
+      this.updateSignInStatus();
+      this.setState({loading: false});
+    });
   }
 
-  handleClientLoad() {
-    gapi.load('client:auth2', this.initClient);
+  setProfile() {
+    const profile = this.state.auth2.currentUser.get().getBasicProfile();
+
+    this.setState({
+      profile: {
+        id: profile.getId(),
+        fullName: profile.getName(),
+        email: profile.getEmail(),
+      }
+    })
   }
 
   updateSignInStatus = () => {
     const isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get();
 
     if (isSignedIn) {
-      const profile = this.state.auth2.currentUser.get().getBasicProfile();
-      this.setState({
-        profile: {
-          id: profile.getId(),
-          fullName: profile.getName(),
-          email: profile.getEmail(),
-        }
-      })
+      this.setProfile();
+      this.initClient();
     } else {
-      this.setState({profile: {}})
+      this.setState({
+        profile: {},
+      })
     }
 
     this.setState({isSignedIn});
   }
 
-  initClient = () => {
-    this.setState({
-      auth2: gapi.auth2.init({
-        apiKey: credentials.API_KEY,
-        clientId: credentials.CLIENT_ID,
-        discoveryDocs: credentials.DISCOVERY_DOCS,
-        scope: credentials.SCOPES
-      }),
-    });
-
-    this.state.auth2
+  handleAuthClick = () => {
+    this.state.auth2.signIn()
       .then(() => {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSignInStatus);
         this.updateSignInStatus();
-        this.setState({loading: false});
-      })
-      .catch((error) => {
-        console.log(error);
       });
   }
 
-  handleAuthClick = () => {
-    this.state.auth2.signIn().then(() => {
-      this.updateSignInStatus();
-    });
+  handleSignOutClick = () => {
+    gapi.auth2.getAuthInstance().signOut()
+      .then(() => {
+        this.updateSignInStatus();
+      });
   }
 
-  handleSignOutClick = () => {
-    gapi.auth2.getAuthInstance().signOut().then(() => {
-      this.updateSignInStatus();
-    });
+  initClient() {
+    gapi.client.load("https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest");
   }
 
   render() {
