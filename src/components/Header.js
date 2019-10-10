@@ -6,23 +6,25 @@ class Header extends React.Component {
   static propTypes = {
     isSignedIn: PropTypes.bool.isRequired,
     fullName: PropTypes.string,
-    handleAuthClick: PropTypes.func.isRequired,
-    handleSignOutClick: PropTypes.func.isRequired,
+    handleLogin: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     isSignedIn: false,
     fullName: 'Неизвестно',
-    handleAuthClick: () => {},
-    handleSignOutClick: () => {},
+    handleLogin: () => {
+    },
+    handleLogout: () => {
+    },
   }
 
   render() {
     const {
       isSignedIn,
       fullName,
-      handleSignOutClick,
-      handleAuthClick
+      handleLogout,
+      handleLogin
     } = this.props;
 
     const signOut = (
@@ -37,7 +39,7 @@ class Header extends React.Component {
         </Dropdown.Item>
         <Dropdown.Divider/>
         <Dropdown.Item
-          onClick={handleSignOutClick}
+          onClick={handleLogout}
           as="button"
         >
           Выход
@@ -49,7 +51,7 @@ class Header extends React.Component {
       <Button
         className="ml-auto"
         variant="outline-light"
-        onClick={handleAuthClick}
+        onClick={handleLogin}
       >
         Вход
       </Button>
