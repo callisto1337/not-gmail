@@ -27,6 +27,14 @@ export function updateUserData() {
   }
 }
 
+export function handlerChangeSignInStatus() {
+  return (dispatch) => {
+    gapi.auth2.getAuthInstance().isSignedIn.listen(() => {
+      dispatch(updateUserData());
+    });
+  }
+}
+
 export function handleLogin() {
   return (dispatch, getState) => {
     const {app} = getState();

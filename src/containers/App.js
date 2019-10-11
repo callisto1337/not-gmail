@@ -1,7 +1,12 @@
-import App from "../components/App";
+import App from '../components/App';
 import { connect } from 'react-redux';
-import { initApp, toggleLoaderVisibility } from "../store/actions/appAction";
-import { updateUserData, handleLogin, handleLogout } from "../store/actions/userAction";
+import { initApp, toggleLoaderVisibility } from '../store/actions/appAction';
+import {
+  updateUserData,
+  handleLogin,
+  handleLogout,
+  handlerChangeSignInStatus,
+} from '../store/actions/userAction';
 
 const mapStateToProps = ({app, user}) => {
   return {
@@ -17,6 +22,7 @@ const mapDispatchToProps = (dispatch) => {
     updateUserData: () => dispatch(updateUserData()),
     handleLogin: () => dispatch(handleLogin()),
     handleLogout: () => dispatch(handleLogout()),
+    handlerChangeSignInStatus: () => dispatch(handlerChangeSignInStatus()),
   }
 };
 

@@ -1,33 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types'
-import { Navbar, Button, DropdownButton, Dropdown } from 'react-bootstrap'
+import PropTypes from 'prop-types';
+import { Navbar, DropdownButton, Dropdown } from 'react-bootstrap';
 
-class Header extends React.Component {
-  static propTypes = {
-    isSignedIn: PropTypes.bool.isRequired,
-    fullName: PropTypes.string,
-    handleLogin: PropTypes.func.isRequired,
-    handleLogout: PropTypes.func.isRequired,
-  }
+function Header(props) {
+  const {
+    fullName,
+    handleLogout,
+  } = props;
 
-  static defaultProps = {
-    isSignedIn: false,
-    fullName: 'Неизвестно',
-    handleLogin: () => {
-    },
-    handleLogout: () => {
-    },
-  }
-
-  render() {
-    const {
-      isSignedIn,
-      fullName,
-      handleLogout,
-      handleLogin
-    } = this.props;
-
-    const signOut = (
+  return (
+    <Navbar
+      bg="primary"
+      variant="dark"
+    >
+      <Navbar.Brand>
+        Not Gmail
+      </Navbar.Brand>
       <DropdownButton
         alignRight
         title="Профиль"
@@ -45,30 +33,19 @@ class Header extends React.Component {
           Выход
         </Dropdown.Item>
       </DropdownButton>
-    );
-
-    const signIn = (
-      <Button
-        className="ml-auto"
-        variant="outline-light"
-        onClick={handleLogin}
-      >
-        Вход
-      </Button>
-    );
-
-    return (
-      <Navbar
-        bg="primary"
-        variant="dark"
-      >
-        <Navbar.Brand>
-          Not Gmail
-        </Navbar.Brand>
-        {isSignedIn ? signOut : signIn}
-      </Navbar>
-    )
-  }
+    </Navbar>
+  );
 }
+
+Header.propTypes = {
+  fullName: PropTypes.string,
+  handleLogout: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+  fullName: 'Неизвестно',
+  handleLogout: () => {
+  },
+};
 
 export default Header;

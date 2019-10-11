@@ -1,6 +1,7 @@
 import React from 'react';
 import AppLoader from "../components/AppLoader";
 import Header from "../components/Header";
+import Login from "./Login";
 
 class App extends React.Component {
   constructor(props) {
@@ -10,11 +11,13 @@ class App extends React.Component {
       toggleLoaderVisibility,
       initApp,
       updateUserData,
+      handlerChangeSignInStatus,
     } = this.props;
 
     toggleLoaderVisibility(true);
     initApp(() => {
       updateUserData();
+      handlerChangeSignInStatus();
       toggleLoaderVisibility(false);
     });
   }
@@ -26,16 +29,16 @@ class App extends React.Component {
 
     if (isLoading) {
       return <AppLoader/>;
+    } else if (isSignedIn) {
+      return (
+        <Header
+          fullName={profile.fullName}
+          handleLogout={handleLogout}
+        />
+      );
+    } else {
+      return <Login handleLogin={handleLogin} />
     }
-
-    return (
-      <Header
-        isSignedIn={isSignedIn}
-        fullName={profile.fullName}
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
-      />
-    )
   }
 }
 
