@@ -2,6 +2,7 @@ import React from 'react';
 import AppLoader from "../components/AppLoader";
 import Header from "../components/Header";
 import Login from "./Login";
+import Mail from "./Mail";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class App extends React.Component {
 
     toggleLoaderVisibility(true);
     initApp(() => {
-      updateUserData();
       handlerChangeSignInStatus();
+      updateUserData();
       toggleLoaderVisibility(false);
     });
   }
@@ -26,18 +27,25 @@ class App extends React.Component {
     const {isLoading} = this.props.app;
     const {handleLogin, handleLogout} = this.props;
     const {profile, isSignedIn} = this.props.user;
+    const {threads, threadsIsLoading} = this.props.mail;
 
     if (isLoading) {
       return <AppLoader/>;
     } else if (isSignedIn) {
       return (
-        <Header
-          fullName={profile.fullName}
-          handleLogout={handleLogout}
-        />
+        <div>
+          <Header
+            fullName={profile.fullName}
+            handleLogout={handleLogout}
+          />
+          <Mail
+            threads={threads}
+            threadsIsLoading={threadsIsLoading}
+          />
+        </div>
       );
     } else {
-      return <Login handleLogin={handleLogin} />
+      return <Login handleLogin={handleLogin}/>
     }
   }
 }

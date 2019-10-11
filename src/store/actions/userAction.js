@@ -1,4 +1,6 @@
 /* global gapi */
+import { getThreads } from './mailAction';
+
 export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
 
 export function updateUserData() {
@@ -20,7 +22,8 @@ export function updateUserData() {
         id: profile.getId(),
         fullName: profile.getName(),
         email: profile.getEmail(),
-      }
+      };
+      dispatch(getThreads());
     }
 
     dispatch(action);
@@ -39,18 +42,12 @@ export function handleLogin() {
   return (dispatch, getState) => {
     const {app} = getState();
 
-    app.auth2.signIn()
-      .then(() => {
-        dispatch(updateUserData());
-      });
+    app.auth2.signIn();
   }
 }
 
 export function handleLogout() {
   return (dispatch) => {
-    gapi.auth2.getAuthInstance().signOut()
-      .then(() => {
-        dispatch(updateUserData());
-      });
+    gapi.auth2.getAuthInstance().signOut();
   }
 }

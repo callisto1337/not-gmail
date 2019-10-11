@@ -8,10 +8,11 @@ import {
   handlerChangeSignInStatus,
 } from '../store/actions/userAction';
 
-const mapStateToProps = ({app, user}) => {
+const mapStateToProps = ({app, user, mail}) => {
   return {
     app,
     user,
+    mail,
   };
 };
 
