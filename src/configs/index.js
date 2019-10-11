@@ -1,5 +1,5 @@
-import credentials from "./credentials";
+import credentials from './credentials';
 
-export {
+export default {
   credentials,
-}
+};

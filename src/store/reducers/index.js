@@ -3,7 +3,7 @@ import { appReducer } from './appReducer';
 import { userReducer } from './userReducer';
 import { mailReducer } from './mailReducer';
 
-export const rootReducer = combineReducers({
+export default combineReducers({
   app: appReducer,
   user: userReducer,
   mail: mailReducer,

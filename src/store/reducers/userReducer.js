@@ -7,13 +7,12 @@ export const initialState = {
   isSignedIn: false,
 };
 
-export function userReducer(state = initialState, {type, payload}) {
+export function userReducer(state = initialState, { type, payload }) {
   if (type === UPDATE_USER_DATA) {
     return {
       ...state,
       ...payload,
     };
-  } else {
-    return state
   }
+  return state;
 }

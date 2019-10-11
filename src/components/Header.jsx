@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, DropdownButton, Dropdown } from 'react-bootstrap';
 
-function Header(props) {
-  const {
-    fullName,
-    handleLogout,
-  } = props;
-
+function Header({ fullName, handleLogout }) {
   return (
     <Navbar
       bg="primary"
@@ -25,7 +20,7 @@ function Header(props) {
         <Dropdown.Item as="button" disabled>
           {fullName}
         </Dropdown.Item>
-        <Dropdown.Divider/>
+        <Dropdown.Divider />
         <Dropdown.Item
           onClick={handleLogout}
           as="button"
@@ -38,14 +33,8 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  fullName: PropTypes.string,
+  fullName: PropTypes.string.isRequired,
   handleLogout: PropTypes.func.isRequired,
-};
-
-Header.defaultProps = {
-  fullName: 'Неизвестно',
-  handleLogout: () => {
-  },
 };
 
 export default Header;

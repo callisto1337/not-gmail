@@ -3,4 +3,4 @@ export default {
   API_KEY: '',
   DISCOVERY_DOCS: '',
   SCOPES: '',
-}
+};

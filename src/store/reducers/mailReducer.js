@@ -8,7 +8,7 @@ export const initialState = {
   threads: [],
 };
 
-export function mailReducer(state = initialState, {type, payload}) {
+export function mailReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_THREADS_REQUEST:
       return {
@@ -22,6 +22,6 @@ export function mailReducer(state = initialState, {type, payload}) {
         threads: payload.threads,
       };
     default:
-      return state
+      return state;
   }
 }

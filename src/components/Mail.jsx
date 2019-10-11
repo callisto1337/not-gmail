@@ -3,28 +3,23 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 import MailThreads from './MailThreads';
 
-function Mail(props) {
+function Mail({ threads, threadsIsLoading }) {
   return (
     <Container
-      fluid={true}
+      fluid
       className="py-3"
     >
       <MailThreads
-        threads={props.threads}
-        threadsIsLoading={props.threadsIsLoading}
+        threads={threads}
+        threadsIsLoading={threadsIsLoading}
       />
     </Container>
-  )
+  );
 }
 
 Mail.propTypes = {
-  threads: PropTypes.array.isRequired,
-  threadsIsLoading: PropTypes.bool,
-};
-
-Mail.defaultProps = {
-  threads: [],
-  threadsIsLoading: false,
+  threads: PropTypes.arrayOf(PropTypes.object).isRequired,
+  threadsIsLoading: PropTypes.bool.isRequired,
 };
 
 export default Mail;

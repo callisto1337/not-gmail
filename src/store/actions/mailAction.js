@@ -9,19 +9,17 @@ export function getThreads() {
     });
 
     gapi.client.load('https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest')
-      .then(() => {
-          return gapi.client.gmail.users.threads.list({
-            userId: 'me',
-            maxResults: 20,
-          })
-        })
+      .then(() => gapi.client.gmail.users.threads.list({
+        userId: 'me',
+        maxResults: 20,
+      }))
       .then((response) => {
         dispatch({
           type: GET_THREADS_SUCCESS,
           payload: {
             threads: response.result.threads,
-          }
+          },
         });
       });
-  }
+  };
 }

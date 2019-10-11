@@ -1,4 +1,4 @@
-import { INIT_APP, TOGGLE_LOADER_VISIBILITY } from "../actions/appAction";
+import { INIT_APP, TOGGLE_LOADER_VISIBILITY } from '../actions/appAction';
 
 export const initialState = {
   isLoading: false,
@@ -18,6 +18,6 @@ export function appReducer(state = initialState, { type, payload }) {
         isLoading: payload.status,
       };
     default:
-      return state
+      return state;
   }
 }

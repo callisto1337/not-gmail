@@ -1,5 +1,5 @@
 /* global gapi */
-import credentials from "../../configs/credentials";
+import credentials from '../../configs/credentials';
 
 export const INIT_APP = 'INIT_APP';
 export const TOGGLE_LOADER_VISIBILITY = 'TOGGLE_LOADER_VISIBILITY';
@@ -16,7 +16,7 @@ export function initApp(callback) {
           type: INIT_APP,
           payload: {
             auth2,
-          }
+          },
         });
         callback();
       });
@@ -30,6 +30,5 @@ export function toggleLoaderVisibility(status) {
     payload: {
       status,
     },
-  }
+  };
 }
-

@@ -2,23 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MailThreadsItem from './MailThreadsItem';
 
-function MailThreads(props) {
-  if (props.threadsIsLoading) {
+function MailThreads({ threads, threadsIsLoading }) {
+  if (threadsIsLoading) {
     return (
       <h1 className="h2">
         Загрузка...
       </h1>
-    )
-  }
-
-  const threads = props.threads.map(((thread) => {
-    return (
-      <MailThreadsItem
-        key={thread.id}
-        text={thread.snippet}
-      />
     );
-  }));
+  }
 
   return (
     <div>
@@ -26,14 +17,19 @@ function MailThreads(props) {
         Входящие
       </h1>
       <ul>
-        {threads}
+        {threads.map(((thread) => (
+          <MailThreadsItem
+            key={thread.id}
+            text={thread.snippet}
+          />
+        )))}
       </ul>
     </div>
   );
 }
 
 MailThreads.propTypes = {
-  threads: PropTypes.array.isRequired,
+  threads: PropTypes.arrayOf(PropTypes.object),
   threadsIsLoading: PropTypes.bool,
 };
 

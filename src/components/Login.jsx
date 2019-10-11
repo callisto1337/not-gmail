@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-export default function Login(props) {
+export default function Login({ handleLogin }) {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center min-vh-100">
       <h1>
@@ -13,10 +14,14 @@ export default function Login(props) {
       <Button
         variant="danger"
         className="mt-3"
-        onClick={props.handleLogin}
+        onClick={handleLogin}
       >
         Войти
       </Button>
     </div>
-  )
+  );
 }
+
+Login.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+};

@@ -11,11 +11,11 @@ export function updateUserData() {
       payload: {
         profile: {},
         isSignedIn,
-      }
+      },
     };
 
     if (isSignedIn) {
-      const {app} = getState();
+      const { app } = getState();
       const profile = app.auth2.currentUser.get().getBasicProfile();
 
       action.payload.profile = {
@@ -27,7 +27,7 @@ export function updateUserData() {
     }
 
     dispatch(action);
-  }
+  };
 }
 
 export function handlerChangeSignInStatus() {
@@ -35,17 +35,17 @@ export function handlerChangeSignInStatus() {
     gapi.auth2.getAuthInstance().isSignedIn.listen(() => {
       dispatch(updateUserData());
     });
-  }
+  };
 }
 
 export function handleLogin() {
   return (dispatch, getState) => {
     getState().app.auth2.signIn();
-  }
+  };
 }
 
 export function handleLogout() {
   return () => {
     gapi.auth2.getAuthInstance().signOut();
-  }
+  };
 }
