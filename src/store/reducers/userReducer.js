@@ -1,6 +1,6 @@
 import {
   UPDATE_USER_DATA,
-} from "../actions/userAction";
+} from '../actions/userAction';
 
 export const initialState = {
   profile: {},

@@ -1,7 +1,7 @@
 import React from 'react';
-import MailThreads from './MailThreads';
 import PropTypes from 'prop-types';
-import { Container } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
+import MailThreads from './MailThreads';
 
 function Mail(props) {
   return (

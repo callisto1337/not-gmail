@@ -1,8 +1,8 @@
 import React from 'react';
-import AppLoader from "../components/AppLoader";
-import Header from "../components/Header";
-import Login from "./Login";
-import Mail from "./Mail";
+import AppLoader from '../components/AppLoader';
+import Header from '../components/Header';
+import Login from './Login';
+import Mail from './Mail';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ class App extends React.Component {
         </div>
       );
     } else {
-      return <Login handleLogin={handleLogin}/>
+      return <Login handleLogin={handleLogin}/>;
     }
   }
 }

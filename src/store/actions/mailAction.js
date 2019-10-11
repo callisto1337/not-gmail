@@ -8,7 +8,7 @@ export function getThreads() {
       type: GET_THREADS_REQUEST,
     });
 
-    gapi.client.load("https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest")
+    gapi.client.load('https://content.googleapis.com/discovery/v1/apis/gmail/v1/rest')
       .then(() => {
           return gapi.client.gmail.users.threads.list({
             userId: 'me',

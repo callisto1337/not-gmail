@@ -40,14 +40,12 @@ export function handlerChangeSignInStatus() {
 
 export function handleLogin() {
   return (dispatch, getState) => {
-    const {app} = getState();
-
-    app.auth2.signIn();
+    getState().app.auth2.signIn();
   }
 }
 
 export function handleLogout() {
-  return (dispatch) => {
+  return () => {
     gapi.auth2.getAuthInstance().signOut();
   }
 }

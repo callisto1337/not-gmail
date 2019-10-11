@@ -1,7 +1,7 @@
 import {
   GET_THREADS_REQUEST,
   GET_THREADS_SUCCESS,
-} from "../actions/mailAction";
+} from '../actions/mailAction';
 
 export const initialState = {
   threadsIsLoading: null,

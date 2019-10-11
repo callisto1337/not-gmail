@@ -1,6 +1,6 @@
 import React from 'react';
-import MailThreadsItem from "./MailThreadsItem";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import MailThreadsItem from './MailThreadsItem';
 
 function MailThreads(props) {
   if (props.threadsIsLoading) {
